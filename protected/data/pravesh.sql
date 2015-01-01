@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `tbl_developer` (
   `firstName` VARCHAR(45) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `phone` INT NOT NULL,
+  `phone` VARCHAR(45) NOT NULL,
   `dateOfBirth` VARCHAR(255) NOT NULL,
   `sex` VARCHAR(45) NOT NULL,
   `organization` VARCHAR(255) NOT NULL,
