@@ -1,9 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request, url_for
-from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
-from wtforms import TextField, PasswordField, validators, HiddenField
+from wtforms import TextField, PasswordField, validators, HiddenField, Form
 from wtforms import TextAreaField, BooleanField, RadioField, SelectMultipleField
 from wtforms.widgets import CheckboxInput
 
@@ -14,19 +13,19 @@ app.config['SECRET_KEY'] = 'MyLongSampleSecretKey'
 #app.secret_key = 'development key'
 
 class RegistrationForm(Form):
-  firstName = TextField("First Name")
-  lastName = TextField("Last Name")
-  email = TextField("Email")
+  firstName = TextField("FirstName")
+  lastName = TextField("LastName")
+  email = TextField("email")
   phone = TextField("Phone")
-  dob = TextField("Date of Birth")
+  dob = TextField("DateofBirth")
   sex = RadioField("Male","Female")
   org = TextField("Organization")
-  github = TextField("GitHub Username")
+  github = TextField("GitHubUsername")
   linkedin = TextField("LinkedIn ")
-  gplus = TextField("Google Plus Username")
-  techid = CheckboxInput("Interested Technology")
+  gplus = TextField("GooglePlusUsername")
+  techid = CheckboxInput("InterestedTechnology")
   
-  submit = SubmitField("Send")
+  submit = SubmitField("Submit")
 
 
 @app.errorhandler(404)
@@ -35,9 +34,24 @@ def page_not_found(e):
 
 @app.route('/register/', methods=('GET', 'POST'))
 def register():
-	form = RegistrationForm()
+  form = RegistrationForm()
+  if request.method == 'POST':
+        firstName_var = request.form['firstName']
+        lastName_var = request.form['lastName']
+        email_var = request.form['email']
+        phone_var = request.form['phone']
+        dob_var = request.form['dob']
+        #sex_var = request.form['sex_female']
+        # org_var = request.form['org']
+        # github_var = request.form['github']
+        # linkedin_var = request.form['linkedin']
+        # gplus_var = request.form['gplus']
+        #techid_var = request.form['techandroid']
 
-	return render_template('register.html', form=form)
+        print firstName_var,lastName_var,email_var,phone_var,dob_var
+
+
+  return render_template('register.html', form=form)
 
 @app.route('/')
 def index():

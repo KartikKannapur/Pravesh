@@ -12,62 +12,57 @@
 
 	<h3>Welcome Developer!</h3>
 	
-	<form action="../register" method=post>
+	<form action='' method="POST">
 
 		<div>	
 			<label for="firstName">First Name</label>
-			<input id="firstName" type="text">
+			<input id="firstName" type="text" name="firstName">
 		</div>
 		<br>
 		<div>	
 			<label for="lastName">Last Name</label>
-			<input id="lastName" type="text">
+			<input id="lastName" type="text" name="lastName">
 		</div>
 		<br>
 		<div>	
 			<label for="email">Email</label>
-			<input id="email" type="text">
+			<input id="email" type="text" name="email">
 		</div>
 		<br>
 		<div>	
 			<label for="phone">Phone</label>
-			<input id="phone" type="text">
+			<input id="phone" type="text" name="phone">
 		</div>
 		<br>
 		<div>	
 			<label for="dob">Date of Birth</label>
-			<input id="dob" type="text">
-		</div>
-		<br>
-		<div>	
-			<label for="dob">Date of Birth</label>
-			<input id="dob" type="text">
+			<input id="dob" type="text" name="dob">
 		</div>
 		<br>
 		<div>	
 			<label for="sex">Sex </label>
-			<input type="radio" name="sex" value="male" checked>Male 
-			<input type="radio" name="sex" value="female">Female
+			<input type="radio" name="sex_male" value="male">Male 
+			<input type="radio" name="sex_female" value="female">Female
 		</div>
 		<br>
 		<div>	
 			<label for="org">Organization</label>
-			<input id="org" type="text">
+			<input id="org" type="text" name="org">
 		</div>
 		<br>
 		<div>	
 			<label for="github">GitHub Username</label>
-			<input id="github" type="text">
+			<input id="github" type="text" name="github">
 		</div>
 		<br>
 		<div>	
 			<label for="linkedin">LinkedIn</label>
-			<input id="linkedin" type="text">
+			<input id="linkedin" type="text" name="linkedin">
 		</div>
 		<br>
 		<div>	
 			<label for="gplus">Google Plus Username</label>
-			<input id="gplus" type="text">
+			<input id="gplus" type="text" name="gplus">
 		</div>
 		<br>
 		<div>	
@@ -80,7 +75,7 @@
 		</div>
 
 
-		<button action="form.submit" type="button">Submit</button>
+		<input type="submit" value="Submit" />
 		
 	</form>
 	
