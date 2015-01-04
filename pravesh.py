@@ -18,7 +18,7 @@ class RegistrationForm(Form):
   email = TextField("email")
   phone = TextField("Phone")
   dob = TextField("DateofBirth")
-  sex = RadioField("Male","Female")
+  sex = RadioField("Sex")
   org = TextField("Organization")
   github = TextField("GitHubUsername")
   linkedin = TextField("LinkedIn ")
@@ -41,14 +41,14 @@ def register():
         email_var = request.form['email']
         phone_var = request.form['phone']
         dob_var = request.form['dob']
-        #sex_var = request.form['sex_female']
-        # org_var = request.form['org']
-        # github_var = request.form['github']
-        # linkedin_var = request.form['linkedin']
-        # gplus_var = request.form['gplus']
-        #techid_var = request.form['techandroid']
+        sex_var = request.form['sex_mf']
+        org_var = request.form['org']
+        github_var = request.form['github']
+        linkedin_var = request.form['linkedin']
+        gplus_var = request.form['gplus']
+        techid_var = request.form['techid']
 
-        print firstName_var,lastName_var,email_var,phone_var,dob_var
+        print firstName_var, lastName_var, techid_var
 
 
   return render_template('register.html', form=form)
