@@ -46,10 +46,11 @@ def register():
         github_var = request.form['github']
         linkedin_var = request.form['linkedin']
         gplus_var = request.form['gplus']
-        techid_var = request.form['techid']
-
-        print firstName_var, lastName_var, techid_var
-
+        techid_var = request.form.getlist('techid')
+	
+        print firstName_var, lastName_var, sex_var
+	for techid in techid_var:
+		print techid
 
   return render_template('register.html', form=form)
 
