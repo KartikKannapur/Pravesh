@@ -5,6 +5,8 @@ from wtforms import StringField, SubmitField
 from wtforms import TextField, PasswordField, validators, HiddenField, Form
 from wtforms import TextAreaField, BooleanField, RadioField, SelectMultipleField
 from wtforms.widgets import CheckboxInput
+from praveshServices import *
+
 
 app = Flask(__name__)
 app.config['CSRF_ENABLED'] = True
@@ -49,8 +51,24 @@ def register():
         techid_var = request.form.getlist('techid')
 	
         print firstName_var, lastName_var, sex_var
+
+	techid_var_str = ""
 	for techid in techid_var:
+		techid_var_str = techid_var_str + techid + ", "
 		print techid
+
+	print techid_var_str
+
+
+	# MODIFED BY ANUJ:
+
+	# TODO: REGISTER NEW DEVELOPER BY CALLING A SERVICE FROM praveshServices.py:
+
+	# Register New Developer:
+	o_pravesh = pravesh()
+	o_pravesh.createDeveloperProfile(firstName_var, lastName_var, email_var, phone_var, dob_var, sex_var, org_var, github_var, linkedin_var, gplus_var, techid_var_str)
+
+
 
   return render_template('register.html', form=form)
 
