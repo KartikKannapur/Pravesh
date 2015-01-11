@@ -16,38 +16,38 @@
 
 		<div>	
 			<label for="firstName">First Name</label>
-			<input id="firstName" type="text" name="firstName">
+			<input id="firstName" type="text" name="firstName" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
 		</div>
 		<br>
 		<div>	
 			<label for="lastName">Last Name</label>
-			<input id="lastName" type="text" name="lastName">
+			<input id="lastName" type="text" name="lastName" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
 		</div>
 		<br>
 		<div>	
 			<label for="email">Email</label>
-			<input id="email" type="text" name="email">
+			<input id="email" type="text" name="email" placeholder="ex@example.com" required >
 		</div>
 		<br>
 		<div>	
 			<label for="phone">Phone</label>
-			<input id="phone" type="text" name="phone">
+			<input id="phone" type="text" name="phone" placeholder="+91-xxxxxxxxxx" required pattern="(\+?\d[- .]*){7,13}">
 		</div>
 		<br>
 		<div>	
 			<label for="dob">Date of Birth</label>
-			<input id="dob" type="text" name="dob">
+			<input id="dob" type="text" name="dob" placeholder="DD-MM-YYYY" required pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}">
 		</div>
 		<br>
 		<div>	
 			<label for="sex">Sex </label>
-			<input type="radio" name="sex_mf" value="Male">Male 
+			<input type="radio" name="sex_mf" value="Male" required>Male 
 			<input type="radio" name="sex_mf" value="Female">Female
 		</div>
 		<br>
 		<div>	
 			<label for="org">Organization</label>
-			<input id="org" type="text" name="org">
+			<input id="org" type="text" name="org" required>
 		</div>
 		<br>
 		<div>	

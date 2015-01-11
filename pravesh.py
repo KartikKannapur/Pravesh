@@ -50,7 +50,8 @@ def register():
         gplus_var = request.form['gplus']
         techid_var = request.form.getlist('techid')
 	
-        print firstName_var, lastName_var, sex_var
+        print firstName_var, lastName_var, email_var, phone_var, dob_var, sex_var, org_var
+        print github_var, linkedin_var, gplus_var
 
 	techid_var_str = ""
 	for techid in techid_var:
