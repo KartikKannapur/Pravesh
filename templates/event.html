@@ -9,52 +9,64 @@
 <body>
 	
 	<h1>Event Registrations Page</h1>
-
-	<h3>Create yout event here!</h3>
 	
 	<form action='' method="POST">
 
 		<div>	
-			<label for="event_name">Event name</label>
+			<label for="event_name">Event Name</label>
 			<input id="event_name" type="text" name="event_name">
 		</div>
 		<br>
 		<div>	
-			<label for="event_date">Event date</label>
-			<input id="event_date" type="text" name="event_date">
+			<label for="event_date">Event Date</label>
+			<input id="event_date" type="text" name="event_date" placeholder="DD-MM-YYYY" required pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}">
 		</div>
 		<br>
 		<div>	
-			<label for="event_venue">Event venue</label>
+			<label for="event_venue">Event Venue</label>
 			<input id="event_venue" type="text" name="event_venue">
 		</div>
 		<br>
 		<!--What exactly do we want in event type??-->
 		<div>	
-			<label for="event_description">Event description</label>
-			<input id="event_description" type="text" name="event_description">
+			<label for="event_description">Event Description</label>
+			<textarea id="event_description" type="text" name="event_description" placeholder="About the event" rows="3" cols="40"></textarea>
 		</div>
 		<br>
-		<!--What are we looking at with Technology ID-->
+		<div>	
+			<label for="event_tech">Event Technology</label>
+			<input type="radio" name="event_techId" value="Android">Android
+			<input type="radio" name="event_techId" value="Chrome">Chrome
+			<input type="radio" name="event_techId" value="Polymer">Polymer
+			<input type="radio" name="event_techId" value="Cloud">Cloud
+			<input type="radio" name="event_techId" value="UI/UX">UI/UX
+		</div>
+		<br>
 		<div>	
 			<label for="event_GPLusLink">Google Plus Event Link</label>
 			<input id="event_GPLusLink" type="text" name="event_GPLusLink">
 		</div>
 		<br>
 		<div>	
-			<label for="sex">Sex </label>
-			<input type="radio" name="sex_mf" value="Male">Male 
-			<input type="radio" name="sex_mf" value="Female">Female
+			<label for="event_points">Event Points</label>
+			<input id="event_points" type="text" name="event_points" min="1" max="8">
+		</div>
+		<br>
+		<br>
+		<div>	
+			<label for="event_dev_registered">Developers Registred</label>
+			<input id="event_points" type="text" name="event_dev_registered" min="1" max="1000">
 		</div>
 		<br>
 		<div>	
-			<label for="event_points">Event Points</label>
-			<input id="event_points" type="text" name="event_points">
+			<label for="event_dev_attended">Developers Attended</label>
+			<input id="event_points" type="text" name="event_dev_attended" min="1" max="1000">
 		</div>
+
 		
 
 
-		<input type="submit" value="Submit" />
+		<input type="submit" value="Create Event" />
 		
 	</form>
 	
