@@ -1,7 +1,7 @@
 #
 #                       AUTHOR                  :                       ANUJ DUGGAL
 #                       DATE CREATED            :                       DECEMBER 31, 2014
-#                       DATE MODIFIED           :                       JANUARY 9, 2015
+#                       DATE MODIFIED           :                       JANUARY 12, 2015
 #                       VERSION                 :                       1.0
 #                       DESCRIPTION             :                       Services exposed as APIs for Pravesh functionality
 #
@@ -83,6 +83,47 @@ class pravesh:
 	# TODO: ------ POST EVENT TASKS ------:
 
 
+	# TODO: SOME MORE SERVICES:
+	# 1. FETCH ALL EVENTS
+	# 2. FETCH EVENT DETAILS
+
+	# FETCH ALL EVENTS (TO BE DISPAYED AS A LIST):
+	def fetchAllEvents(self):
+		o_praveshSqlConnect = praveshSqlConnect()
+		
+		# Fetch All Events:
+		listOfEvents = o_praveshSqlConnect.fetchAllEvents()
+	
+		print "Printing List of Events..."
+		for event in listOfEvents:
+			print event[0]
+
+		o_praveshSqlConnect.free()
+
+
+	# FETCH EVENT DETAILS BASED ON event_id:
+	def fetchEventDetails(self, event_id):
+		o_praveshSqlConnect = praveshSqlConnect()
+
+                # Fetch Event Details:
+                eventDetails = o_praveshSqlConnect.fetchEventDetails(event_id)
+
+		# Fetch Event details from Cursor:
+		event = eventDetails.fetchone()
+	
+		# Printing individual Details:
+                print "Printing Event Details..."
+		print "Event Id: " + str(event_id)
+		print "Event Name: " + event[1]
+		print "Event Date: " + event[2]
+		print "Event Type: " + event[4]
+
+		# TODO: THESE DETAILS HAS TO BE LOADED TO RESPECTIVE PLACES IN FRONT END: 
+		# KARTIK TO FOLLOW WITH ME
+
+                o_praveshSqlConnect.free()
+
+
 
 
 # TODO: 
@@ -91,11 +132,22 @@ class pravesh:
 # CREATE AN OBJECT FOR THE CLASS: pravesh
 #o_pravesh = pravesh()
 
+
+
 # CREATING DEVELOPER PROFILE IN PRAVESH PORTAL:
 #o_pravesh.createDeveloperProfile("Anuj", "Duggal", "er.anujduggal@gmail.com", "9980962767", "21/12/1988", "male", "Intel", "anujduggal88", "anujduggal21", "", "Polymer, Android")
 
-o_pravesh = pravesh()
+
+# CREATE EVENT:
+#o_pravesh = pravesh()
 #o_pravesh.createEvent("TestName", "Test Date", "Test Venue", "Meetup", "Test Desc", "Android, Chrome", "Test Link", 2)
 
-#o_pravesh.updateEventDetails()
 
+# FETCH LIST OF ALL EVENTS:
+#o_pravesh = pravesh()
+#o_pravesh.fetchAllEvents()
+
+
+# FETCH EVENT DETAILS:
+o_pravesh = pravesh()
+o_pravesh.fetchEventDetails(6)

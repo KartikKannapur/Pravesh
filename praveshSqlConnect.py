@@ -1,7 +1,7 @@
 #
 #                       AUTHOR                  :                       ANUJ DUGGAL
 #                       DATE CREATED            :                       DECEMBER 31, 2014
-#                       DATE MODIFIED           :                       JANUARY 9, 2015
+#                       DATE MODIFIED           :                       JANUARY 12, 2015
 #                       VERSION                 :                       1.0
 #                       DESCRIPTION             :                       DATABASE CONNECTION, SQL QUERIES
 #
@@ -69,3 +69,17 @@ class praveshSqlConnect:
     def updateDeveloperProfile():
 	print "Test"
 
+
+    # SOME MORE SQL QUERIES:
+    
+    # FETCH THE LIST OF EVENTS:
+    def fetchAllEvents(self):
+	print "[TESTING]: Fetching list of events..."
+	self.cur.execute("SELECT name FROM tbl_event;")
+	return self.cur.fetchall()
+
+    # FETCH EVENT DETAILS BASED ON event_id:
+    def fetchEventDetails(self, event_id):
+	print "[TESTING]: Fetching Event Details based on event_id..."
+	self.cur.execute("SELECT * FROM tbl_event WHERE id=%s;", (event_id))
+	return self.cur

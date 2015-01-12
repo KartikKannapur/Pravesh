@@ -101,7 +101,12 @@ def createEvent():
         print event_GPLusLink_var, event_points_var, event_dev_registered_var, event_dev_attended_var
 
   
-  #ANUJ can add the services here.
+	# MODIFIED BY ANUJ:
+
+	# TODO: CREATE NEW EVENT:
+	event_type_var = "Meet-up"
+	o_pravesh = pravesh()
+	o_pravesh.createEvent(event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, event_techId_var, event_GPLusLink_var, event_points_var)
 
 
   return render_template('event.html', form=form)
