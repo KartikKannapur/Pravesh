@@ -27,7 +27,14 @@
 			<input id="event_venue" type="text" name="event_venue">
 		</div>
 		<br>
-		<!--What exactly do we want in event type??-->
+		<div>	
+			<label for="event_type">Event Type</label>
+			<input type="radio" name="event_typeId" value="Meetup">Meetup
+			<input type="radio" name="event_typeId" value="Hackathon">Hackathon
+			<input type="radio" name="event_typeId" value="Workshop">Workshop
+			<input type="radio" name="event_typeId" value="DevFest">DevFest
+			<input type="radio" name="event_typeId" value="IOExtended">IOExtended
+		</div>
 		<div>	
 			<label for="event_description">Event Description</label>
 			<textarea id="event_description" type="text" name="event_description" placeholder="About the event" rows="3" cols="40"></textarea>

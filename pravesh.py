@@ -33,6 +33,7 @@ class CreateEventForm(Form):
   event_name = TextField("EventName")
   event_date = TextField("EventDate")
   event_venue = TextField("EventVenue")
+  event_type = TextField("EventType")
   event_description = TextAreaField("EventDescription")
   event_techId = RadioField("EventTechId")
   event_GPLusLink = TextField("GooglePlusEventLink")
@@ -97,6 +98,7 @@ def createEvent():
         event_name_var = request.form["event_name"]
         event_date_var = request.form["event_date"]
         event_venue_var = request.form["event_venue"]
+        event_type_var = request.form["event_type"]
         event_description_var = request.form["event_description"]
         event_techId_var = request.form["event_techId"]
         event_GPLusLink_var = request.form["event_GPLusLink"]
@@ -104,7 +106,7 @@ def createEvent():
         event_dev_registered_var = request.form["event_dev_registered"]
         event_dev_attended_var = request.form["event_dev_attended"]
   
-        print event_name_var, event_date_var, event_venue_var, event_description_var, event_techId_var
+        print event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, event_techId_var
         print event_GPLusLink_var, event_points_var, event_dev_registered_var, event_dev_attended_var
 
   
