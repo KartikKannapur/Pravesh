@@ -43,6 +43,13 @@ class CreateEventForm(Form):
   
   submit = SubmitField("CreateEvent")
 
+class SignUpEventForm(Form):
+  signup_email = TextField("SingUpEmail")
+  signup_phone = TextField("SingUpPhone")
+
+  
+  submit = SubmitField("Attend")
+
 @app.route('/register/', methods=('GET', 'POST'))
 def register():
   form = RegistrationForm()
@@ -111,6 +118,17 @@ def createEvent():
 
   return render_template('event.html', form=form)
 
+#Sign Up for an Event
+@app.route('/event/', methods=('GET', 'POST'))
+def signUpEvent():
+  form = SignUpEventForm()
+  if request.method == 'POST':
+        signup_email_var = request.form["signup_email"]
+        signup_phone_var = request.form["signup_phone"]        
+  
+        print signup_email_var, signup_phone_var
+
+  return render_template('signup.html', form=form)
 
 @app.errorhandler(404)
 def page_not_found(e):

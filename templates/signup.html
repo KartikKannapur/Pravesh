@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<h1>Event Sign Up Page</h1>
+
+	<h3>Please enter your details below</h3>
+	
+	<form action='' method="POST">
+
+		<div>	
+			<label for="signup_email">Enter your Email Id</label>
+			<input id="signup_email" type="text" name="signup_email" placeholder="ex@example.com" required >
+		</div>
+		<br>
+		<h4>OR</h4>
+		<br>
+		<div>	
+			<label for="signup_phone">Enter your Phone Number</label>
+			<input id="signup_phone" type="text" name="signup_phone" placeholder="+91-xxxxxxxxxx" required pattern="(\+?\d[- .]*){7,13}">
+		</div>
+		<br>
+		<input type="submit" value="Attend" />
+		
+	</form>
+	
+
+</body>
+</html>
