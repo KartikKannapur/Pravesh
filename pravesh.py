@@ -1,3 +1,8 @@
+#
+#						MODIFIED BY		:		ANUJ DUGGAL
+#						DATE MODIFIED		:		JANUARY 13, 2015
+#
+
 from flask import Flask
 from flask import render_template
 from flask import request, url_for
@@ -33,13 +38,13 @@ class CreateEventForm(Form):
   event_name = TextField("EventName")
   event_date = TextField("EventDate")
   event_venue = TextField("EventVenue")
-  event_type = TextField("EventType")
+  event_typeId = RadioField("EventType")
   event_description = TextAreaField("EventDescription")
-  event_techId = RadioField("EventTechId")
+  event_techId = CheckboxInput("EventTechId")
   event_GPLusLink = TextField("GooglePlusEventLink")
-  event_points = TextField("EventPoints")
-  event_dev_registered = TextField("EventDevRegistered")
-  event_dev_attended = TextField("EventDevAttended")
+  #event_points = DropdownField("EventPoints")
+  #event_dev_registered = TextField("EventDevRegistered")
+  #event_dev_attended = TextField("EventDevAttended")
   
   
   submit = SubmitField("CreateEvent")
@@ -98,24 +103,27 @@ def createEvent():
         event_name_var = request.form["event_name"]
         event_date_var = request.form["event_date"]
         event_venue_var = request.form["event_venue"]
-        event_type_var = request.form["event_type"]
+        event_type_var = request.form["event_typeId"]
         event_description_var = request.form["event_description"]
-        event_techId_var = request.form["event_techId"]
+        event_techId_var = request.form.getlist("event_techId")
         event_GPLusLink_var = request.form["event_GPLusLink"]
         event_points_var = request.form["event_points"]
-        event_dev_registered_var = request.form["event_dev_registered"]
-        event_dev_attended_var = request.form["event_dev_attended"]
+        #event_dev_registered_var = request.form["event_dev_registered"]
+        #event_dev_attended_var = request.form["event_dev_attended"]
   
-        print event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, event_techId_var
-        print event_GPLusLink_var, event_points_var, event_dev_registered_var, event_dev_attended_var
+        #print event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, event_techId_var
+        #print event_GPLusLink_var, event_points_var, event_dev_registered_var, event_dev_attended_var
 
+	techid_var_str = ""
+	for techid in event_techId_var:
+		techid_var_str = techid_var_str + techid + ", "
+		print techid
   
 	# MODIFIED BY ANUJ:
 
 	# TODO: CREATE NEW EVENT:
-	event_type_var = "Meet-up"
 	o_pravesh = pravesh()
-	o_pravesh.createEvent(event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, event_techId_var, event_GPLusLink_var, event_points_var)
+	o_pravesh.createEvent(event_name_var, event_date_var, event_venue_var, event_type_var, event_description_var, techid_var_str, event_GPLusLink_var, event_points_var)
 
 
   return render_template('event.html', form=form)

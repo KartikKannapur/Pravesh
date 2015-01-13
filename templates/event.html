@@ -1,3 +1,8 @@
+<!--
+								MODIFIED BY		:		ANUJ DUGGAL
+								DATE MODIFIED		:		JANUARY 13, 2015
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,11 +47,11 @@
 		<br>
 		<div>	
 			<label for="event_tech">Event Technology</label>
-			<input type="radio" name="event_techId" value="Android">Android
-			<input type="radio" name="event_techId" value="Chrome">Chrome
-			<input type="radio" name="event_techId" value="Polymer">Polymer
-			<input type="radio" name="event_techId" value="Cloud">Cloud
-			<input type="radio" name="event_techId" value="UI/UX">UI/UX
+			<input type="checkbox" name="event_techId" value="Android">Android
+			<input type="checkbox" name="event_techId" value="Chrome">Chrome
+			<input type="checkbox" name="event_techId" value="Polymer">Polymer
+			<input type="checkbox" name="event_techId" value="Cloud">Cloud
+			<input type="checkbox" name="event_techId" value="UI/UX">UI/UX
 		</div>
 		<br>
 		<div>	
@@ -56,11 +61,17 @@
 		<br>
 		<div>	
 			<label for="event_points">Event Points</label>
-			<input id="event_points" type="text" name="event_points" min="1" max="8">
+			<!-- <input id="event_points" type="text" name="event_points" min="1" max="8"> -->
+			<select name="event_points">
+				<option id="event_points" value="0">No Points</option>
+				<option id="event_points" value="1">Beginner</option>
+  				<option id="event_points" value="2">Intermediate</option>
+  				<option id="event_points" value="3">Expert</option>
+			</select> 
 		</div>
 		<br>
 		<br>
-		<div>	
+<!--		<div>	
 			<label for="event_dev_registered">Developers Registred</label>
 			<input id="event_points" type="text" name="event_dev_registered" min="1" max="1000">
 		</div>
@@ -69,7 +80,7 @@
 			<label for="event_dev_attended">Developers Attended</label>
 			<input id="event_points" type="text" name="event_dev_attended" min="1" max="1000">
 		</div>
-
+-->
 		
 
 
