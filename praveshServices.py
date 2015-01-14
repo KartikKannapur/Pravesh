@@ -57,11 +57,21 @@ class pravesh:
                 o_praveshSqlConnect.free()
 
 
-	def signUpDeveloperForEvent():
+	def signUpDeveloperForEvent(self, event_id, developer_emailId):
 		# WE NEED TO ASSIGN SOME IDENTITY/QR CODE, ETC.. WHICH WILL BE SCANNED DURING THE EVENT
                 o_praveshSqlConnect = praveshSqlConnect()
 
-                o_praveshSqlConnect.signUpDeveloperForEvent()
+		# FIND IF THE DEVELOPER PROFILE ALREADY EXIST:
+		isAlreadyExist = str(o_praveshSqlConnect.isDeveloperAlreadyExist(developer_emailId))
+
+		# SOME INTEGER RETURNED:
+		if isAlreadyExist:
+			# DEVELOPER ALREADY REGISTERED, HENCE SIGN HIM UP FOR THE EVENT.
+			print "Developer Exists with developer id: ..." + isAlreadyExist
+			o_praveshSqlConnect.signUpDeveloperForEvent(event_id, isAlreadyExist)
+		else:
+			# DEVELOPER DOES NOT EXIST, REDIRECT HIM TO REGISTRATION PAGE.
+			print "Developer doesn't exist!"
 
                 o_praveshSqlConnect.free()
 
@@ -129,12 +139,8 @@ class pravesh:
 # TODO: 
 # 1. LINK THE BELOW FUNCTIONALITY WITH FRON END (REGISTRATYION FORM) - THE BELOW CODE IS ONLY FOR TESTING 
 
-# CREATE AN OBJECT FOR THE CLASS: pravesh
+# CREATE DEVELOPER PROFILE IN PRAVESH PORTAL:
 #o_pravesh = pravesh()
-
-
-
-# CREATING DEVELOPER PROFILE IN PRAVESH PORTAL:
 #o_pravesh.createDeveloperProfile("Anuj", "Duggal", "er.anujduggal@gmail.com", "9980962767", "21/12/1988", "male", "Intel", "anujduggal88", "anujduggal21", "", "Polymer, Android")
 
 
@@ -149,5 +155,9 @@ class pravesh:
 
 
 # FETCH EVENT DETAILS:
-o_pravesh = pravesh()
-o_pravesh.fetchEventDetails(6)
+#o_pravesh = pravesh()
+#o_pravesh.fetchEventDetails(6)
+
+# SIGN UP DEVELOPER FOR AN EVENT:
+#o_pravesh = pravesh()
+#o_pravesh.signUpDeveloperForEvent(7, "er.anujduggal@gmail.com")

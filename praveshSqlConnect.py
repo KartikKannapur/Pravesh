@@ -52,11 +52,41 @@ class praveshSqlConnect:
 	self.conn.commit()
 	print "[TESTING]: EVENT UPDATED SUCCESSFULLY!"
 
+
+    # FIND IF THE DEVELOPER PROFILE ALREADY EXIST IN PRAVESH PORTAL:
+    def isDeveloperAlreadyExist(self, emailId):
+	print "[TESTING]: CHECKING IF DEVELOPER PROFILE ALREADY EXIST..."
+	self.cur.execute("SELECT id FROM tbl_developer WHERE email=%s;", (emailId))
+
+	# RETURNING DEVELOPER ID:
+	return self.cur.fetchone()[0]
+
+
+
     # SIGNUP THE REGISTERED DEVELOPER FOR AN EVENT: UPDATE dev_registered field of tbl_event:
-    def signUpDeveloperForEvent():
-	print "Test"
+    def signUpDeveloperForEvent(self, event_id, developerId):
+	print "[TESTING]: Signing Up Developer for Event..."
 
+	# GET THE LIST OF DEVELOPERS ALREADY REGISTERED FOR THIE EVENT AND APPEND NEW DEVELOPER ID:
+	self.cur.execute("SELECT dev_registered FROM tbl_event WHERE id=%s;", (event_id))
+	developerIDs = str(self.cur.fetchone()[0])
 
+	print "Developer Ids already registered are:  " + developerIDs
+
+	if (developerIDs):
+		print "Some developers were already registered earlier for this event."
+		developerIDs = str(developerIDs) + ", " + str(developerId)
+	else:
+		print "No developer is registerd for this event."
+		developerIDs = str(developerId)
+
+	print "Updated Developers Ids are: " + developerIDs
+
+	# UPDATE tbl_event WITH dev_registered:
+	self.cur.execute("UPDATE tbl_event SET dev_registered=%s WHERE id=%s;", (developerIDs, event_id))
+
+	self.conn.commit()
+	print "[TESTING]: Updated Developer Registered for the event successfully!"
 
     # ------------------------------DURING EVENT SQL CALLS------------------------------------:
     def whoAttendedEvent():
