@@ -129,7 +129,7 @@ def createEvent():
   return render_template('event.html', form=form)
 
 #Sign Up for an Event
-@app.route('/event/', methods=('GET', 'POST'))
+@app.route('/signup/', methods=('GET', 'POST'))
 def signUpEvent():
   form = SignUpEventForm()
   if request.method == 'POST':
