@@ -1,7 +1,7 @@
 #
 #                       AUTHOR                  :                       ANUJ DUGGAL
 #                       DATE CREATED            :                       DECEMBER 31, 2014
-#                       DATE MODIFIED           :                       JANUARY 12, 2015
+#                       DATE MODIFIED           :                       JANUARY 14, 2015
 #                       VERSION                 :                       1.0
 #                       DESCRIPTION             :                       Services exposed as APIs for Pravesh functionality
 #
@@ -62,11 +62,11 @@ class pravesh:
                 o_praveshSqlConnect = praveshSqlConnect()
 
 		# FIND IF THE DEVELOPER PROFILE ALREADY EXIST:
-		isAlreadyExist = str(o_praveshSqlConnect.isDeveloperAlreadyExist(developer_emailId))
+		isAlreadyExist = str(o_praveshSqlConnect.getDeveloperId(developer_emailId))
 
 		# SOME INTEGER RETURNED:
 		if isAlreadyExist:
-			# DEVELOPER ALREADY REGISTERED, HENCE SIGN HIM UP FOR THE EVENT.
+		# DEVELOPER ALREADY REGISTERED, HENCE SIGN HIM UP FOR THE EVENT.
 			print "Developer Exists with developer id: ..." + isAlreadyExist
 			o_praveshSqlConnect.signUpDeveloperForEvent(event_id, isAlreadyExist)
 		else:
@@ -77,17 +77,47 @@ class pravesh:
 
 
 	# TODO: ------ DURING EVENT TASKS -------:
-	def developerAttended():
-                o_praveshSqlConnect = praveshSqlConnect()
 
-		o_praveshSqlConnect.whoAttendedEvent()
-                o_praveshSqlConnect.assignPoints()
-		o_praveshSqlConnect.updateDeveloperProfile()
+	def developerAttendedEvent(self, developer_emailId, event_Id):
+		o_praveshSqlConnect = praveshSqlConnect()
+		
+		self.updateDeveloperAttendance(developer_emailId, event_Id)
+                self.assignPoints(developer_emailId, event_Id)
+                #o_praveshSqlConnect.updateDeveloperProfile()
 
-                o_praveshSqlConnect.free()
+                o_praveshSqlConnect.free()	
+	
+
+	def updateDeveloperAttendance(self, developer_emailId, event_Id):
+		o_praveshSqlConnect = praveshSqlConnect()
+
+		developerId = int(o_praveshSqlConnect.getDeveloperId(developer_emailId))
+		o_praveshSqlConnect.setDeveloperAttendance(event_Id, developerId)
+		o_praveshSqlConnect.setDeveloperProfile(event_Id, developerId)
+		o_praveshSqlConnect.free()
 
 
 
+	def assignPoints(self, developer_emailId, event_Id):
+		o_praveshSqlConnect = praveshSqlConnect()
+
+		# GET DEVELOPER ID:
+		developerId = int(o_praveshSqlConnect.getDeveloperId(developer_emailId))
+
+		# GET EVENT POINTS:
+		event_points = int(o_praveshSqlConnect.getEventPoints(event_Id))
+
+		# GET LIST OF TECHNOLOGIES INVOLVED:
+		tech_list = str(o_praveshSqlConnect.getTechnologyListOfEvent(event_Id))
+		
+		# ASSIGN POINTS TO DEVELOPER PROFILE - UPDATE tbl_developer, tbl_developerPoints:
+		o_praveshSqlConnect.setDeveloperPoints(developerId, event_points)
+
+		# ASSIGN POINTS IN DEVELOPER POINTS TABLE:
+		# o_praveshSqlConnect.setDeveloperPoints(tech_list, event_points)
+	
+
+		o_praveshSqlConnect.free()
 
 
 	# TODO: ------ POST EVENT TASKS ------:
@@ -116,11 +146,8 @@ class pravesh:
 		o_praveshSqlConnect = praveshSqlConnect()
 
                 # Fetch Event Details:
-                eventDetails = o_praveshSqlConnect.fetchEventDetails(event_id)
+                event = o_praveshSqlConnect.fetchEventDetails(event_id)
 
-		# Fetch Event details from Cursor:
-		event = eventDetails.fetchone()
-	
 		# Printing individual Details:
                 print "Printing Event Details..."
 		print "Event Id: " + str(event_id)
@@ -155,9 +182,17 @@ class pravesh:
 
 
 # FETCH EVENT DETAILS:
-#o_pravesh = pravesh()
-#o_pravesh.fetchEventDetails(6)
+# o_pravesh = pravesh()
+# o_pravesh.fetchEventDetails(6)
 
 # SIGN UP DEVELOPER FOR AN EVENT:
 #o_pravesh = pravesh()
 #o_pravesh.signUpDeveloperForEvent(7, "er.anujduggal@gmail.com")
+
+# DURING EVENT - DEVELOPER CAME TO ATTEND THE EVENT:
+# TODO:
+# 1. ASSIGN POINTS (AS PER EVENT) - UPDATE tbl_developerPoints, tbl_developer
+# 2. UPDATE tbl_event
+# 3. UPDATE tbl_developer
+o_pravesh = pravesh()
+o_pravesh.developerAttendedEvent("ad@gmail.com", 12)

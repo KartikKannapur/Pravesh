@@ -1,7 +1,7 @@
 #
 #                       AUTHOR                  :                       ANUJ DUGGAL
 #                       DATE CREATED            :                       DECEMBER 31, 2014
-#                       DATE MODIFIED           :                       JANUARY 12, 2015
+#                       DATE MODIFIED           :                       JANUARY 14, 2015
 #                       VERSION                 :                       1.0
 #                       DESCRIPTION             :                       DATABASE CONNECTION, SQL QUERIES
 #
@@ -30,7 +30,10 @@ class praveshSqlConnect:
     # SIGNUP DEVELOPER FOR THE FIRST TIME:
     def pushDeveloperDetails(self, fname, lname, email, phone, dob, sex, organization, github, linkedin, googleplus, technology):
 
-	self.cur.execute("INSERT INTO tbl_developer(firstname, lastname, email, phone, dateOfBirth, sex, organization, github_link, linkedin_link, googlePlus_link, technology_id) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);", (fname, lname, email, phone, dob, sex, organization, github, linkedin, googleplus, technology))
+	# PUSHING POINTS = 0 FOR THE DEVELOEPR REGISTERING FIRST TIME:
+	total_points = int(0)
+
+	self.cur.execute("INSERT INTO tbl_developer(firstname, lastname, email, phone, dateOfBirth, sex, organization, github_link, linkedin_link, googlePlus_link, technology_id, total_points) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);", (fname, lname, email, phone, dob, sex, organization, github, linkedin, googleplus, technology, total_points))
 
 	self.conn.commit()
 
@@ -54,7 +57,7 @@ class praveshSqlConnect:
 
 
     # FIND IF THE DEVELOPER PROFILE ALREADY EXIST IN PRAVESH PORTAL:
-    def isDeveloperAlreadyExist(self, emailId):
+    def getDeveloperId(self, emailId):
 	print "[TESTING]: CHECKING IF DEVELOPER PROFILE ALREADY EXIST..."
 	self.cur.execute("SELECT id FROM tbl_developer WHERE email=%s;", (emailId))
 
@@ -92,7 +95,80 @@ class praveshSqlConnect:
     def whoAttendedEvent():
 	print "Test"
 
-    def assignPoints():
+    # GET EVENT POINTS:
+    def getEventPoints(self, event_Id):
+	print "[TESTING]: Fetching Event Points..."
+	self.cur.execute("SELECT event_points FROM tbl_event WHERE id=%s;", (event_Id))
+
+	event_points = int(self.cur.fetchone()[0])
+	
+	print "Event Points are: " + str(event_points)
+
+	# RETURNING EVENT POINTS:
+	return event_points
+
+
+    # GET TECHNOLOGY LIST OF EVENT:
+    def getTechnologyListOfEvent(self, event_Id):
+	print "[TESTING]: FECTHING LIST OF TECHNOLOGIES USED.."
+	self.cur.execute("SELECT technology_id FROM tbl_event WHERE id=%s;", (event_Id))
+
+	# RETURNING LIST OF TECHNOLOGIES FOR THIS EVENT:
+	technologies = str(self.cur.fetchone()[0])
+
+	print "Technologies in the Event are: " + technologies
+	
+	return technologies
+
+
+    # UPDATE tbl_event WITH DEVELOPERS WHO ATTEND THE EVENT:
+    def setDeveloperAttendance(self, event_Id, developerId):
+	print "[TESTING]: Setting Developer Attendance..."
+	
+	self.cur.execute("SELECT dev_attended FROM tbl_event WHERE id=%s;", (event_Id))
+	dev_attended = str(self.cur.fetchone()[0])
+
+	print "List of developers already attending: " + dev_attended
+
+	dev_attended = dev_attended + ", " + str(developerId)
+
+	print "List of Developers already attending now: " + dev_attended	
+
+	self.cur.execute("UPDATE tbl_event SET dev_attended=%s WHERE id=%s;", (dev_attended, event_Id))
+	self.conn.commit()
+
+
+    # UPDATE DEVELOPER PROFILE WITH THE EVENT ID HE ATTENDS:
+    def setDeveloperProfile(self, event_Id, developerId):
+	print "[TESTING]: Updating Developer Profile..."
+	self.cur.execute("SELECT event_id FROM tbl_developer WHERE id=%s;", (developerId))
+
+	event_attended = str(self.cur.fetchone()[0])
+	
+	print "List of events attended so far: " + event_attended
+	event_attended = event_attended + ", " + str(event_Id)
+	print "List of Events attended now: " + event_attended
+
+	self.cur.execute("UPDATE tbl_developer SET event_id=%s WHERE id=%s", (event_attended, developerId))
+	self.conn.commit()
+
+    # UPDATE tbl_developer WITH EVENT POINTS:
+    def setDeveloperPoints(self, developerId, event_points):
+	print "[TESTING]: Updating tbl_Developer..."
+	
+	# GET TOTAL POINTS DEVELOPER HAS:
+	self.cur.execute("SELECT total_points FROM tbl_developer WHERE id=%s;", (developerId))
+	total_points = int(self.cur.fetchone()[0])
+
+	print "Developer has total points: " + str(total_points)
+	updated_total_points = total_points + event_points
+	print "Updated Points: " + str(updated_total_points)
+
+	# UPDTAE QUERY:
+	self.cur.execute("UPDATE tbl_developer SET total_points=%s WHERE id=%s;", (updated_total_points, developerId))
+	self.conn.commit()
+
+    def assignPoints(self, developer_emailId, points):
 	print "Test"
 
     # UPDATE DEVELOPER PROFILE WITH EVENTS HE HAS ATTENDED: UPDATE event_id field in tbl_developer:
@@ -112,4 +188,4 @@ class praveshSqlConnect:
     def fetchEventDetails(self, event_id):
 	print "[TESTING]: Fetching Event Details based on event_id..."
 	self.cur.execute("SELECT * FROM tbl_event WHERE id=%s;", (event_id))
-	return self.cur
+	return self.cur.fetchone()
