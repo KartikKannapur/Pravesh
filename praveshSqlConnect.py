@@ -59,10 +59,12 @@ class praveshSqlConnect:
     # FIND IF THE DEVELOPER PROFILE ALREADY EXIST IN PRAVESH PORTAL:
     def getDeveloperId(self, emailId):
 	print "[TESTING]: CHECKING IF DEVELOPER PROFILE ALREADY EXIST..."
+	print "Email Id: " + str(emailId)
 	self.cur.execute("SELECT id FROM tbl_developer WHERE email=%s;", (emailId))
-
+	dev_id = str(self.cur.fetchone()[0])
+	print "The id for the abobe Email-Id is: " + dev_id
 	# RETURNING DEVELOPER ID:
-	return self.cur.fetchone()[0]
+	return int(dev_id)
 
 
 

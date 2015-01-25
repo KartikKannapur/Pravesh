@@ -194,5 +194,5 @@ class pravesh:
 # 1. ASSIGN POINTS (AS PER EVENT) - UPDATE tbl_developerPoints, tbl_developer
 # 2. UPDATE tbl_event
 # 3. UPDATE tbl_developer
-o_pravesh = pravesh()
-o_pravesh.developerAttendedEvent("ad@gmail.com", 12)
+# o_pravesh = pravesh()
+# o_pravesh.developerAttendedEvent("ad@gmail.com", 12)

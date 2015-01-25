@@ -51,9 +51,8 @@ class CreateEventForm(Form):
 
 class SignUpEventForm(Form):
   signup_email = TextField("SingUpEmail")
-  signup_phone = TextField("SingUpPhone")
+  #signup_phone = TextField("SingUpPhone")
 
-  
   submit = SubmitField("Attend")
 
 @app.route('/register/', methods=('GET', 'POST'))
@@ -134,9 +133,16 @@ def signUpEvent():
   form = SignUpEventForm()
   if request.method == 'POST':
         signup_email_var = request.form["signup_email"]
-        signup_phone_var = request.form["signup_phone"]        
+        #signup_phone_var = request.form["signup_phone"]        
   
-        print signup_email_var, signup_phone_var
+        print signup_email_var
+
+	# SIGNUP DEVELOPER FOR EVENT:
+	o_pravesh = pravesh()
+
+	# DEFAULT VALUE FOR EVENT_ID, NEEDS TO BE UPDATED - DISCUSS WITH KARTIK:
+	event_id = int(11)
+	o_pravesh.signUpDeveloperForEvent(event_id, str(signup_email_var))
 
   return render_template('signup.html', form=form)
 
