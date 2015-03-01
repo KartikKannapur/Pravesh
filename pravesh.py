@@ -55,6 +55,12 @@ class SignUpEventForm(Form):
 
   submit = SubmitField("Attend")
 
+class AttendeeEventForm(Form):
+  signup_email = TextField("AttendeeEmail")
+  #signup_phone = TextField("AttendeePhone")
+
+  submit = SubmitField("Attend")
+
 @app.route('/register/', methods=('GET', 'POST'))
 def register():
   form = RegistrationForm()
@@ -145,6 +151,24 @@ def signUpEvent():
 	o_pravesh.signUpDeveloperForEvent(event_id, str(signup_email_var))
 
   return render_template('signup.html', form=form)
+
+#Return Event List
+@app.route('/eventList/', methods=('GET', 'POST'))
+def eventList():
+  return render_template('eventList.html')
+
+#Attendee Form
+@app.route('/attendee/', methods=('GET', 'POST'))
+def attendeeForm():
+  form = AttendeeEventForm()
+  if request.method == 'POST':
+        attendee_email_var = request.form["attendee_email"]
+        #attendee_phone_var = request.form["attendee_phone"]        
+  
+        print attendee_email_var
+
+  return render_template('attendee.html', form=form)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
